@@ -22,7 +22,7 @@ pixi run lint           # flake8 with bugbear, docstrings, and naming plugins
 pixi run typecheck      # mypy --strict on src and tests
 pixi run test           # pytest with coverage (fails under 90%)
 pixi run check          # format-check, lint, typecheck, and test together
-pixi run docs           # mkdocs build --strict
+pixi run docs           # zensical build --strict (reads mkdocs.yml)
 pixi run build          # python -m build, then twine check
 ```
 
@@ -49,7 +49,8 @@ To add a dependency, add it to the right `[tool.pixi...dependencies]` table
 
 - `src/hydrodemo/`: package source, one module per capability.
 - `tests/`: one `test_<module>.py` per source module; shared fixtures in `conftest.py`.
-- `docs/`: MkDocs pages. API pages are generated from docstrings with mkdocstrings.
+- `docs/`: documentation pages, built with Zensical from `mkdocs.yml`. API pages are
+  generated from docstrings with mkdocstrings.
 
 ## Workflow
 

@@ -58,7 +58,7 @@ flake8-docstrings = ">=1.7"
 pep8-naming = ">=0.14"
 
 [tool.pixi.feature.docs.dependencies]
-mkdocs-material = ">=9.5"
+zensical = ">=0.1.1"
 mkdocstrings-python = ">=1.12"
 
 [tool.pixi.feature.build.dependencies]
@@ -74,7 +74,7 @@ format-check = "isort --check-only --diff src tests && black --check --diff src 
 lint = "flake8"
 typecheck = "mypy"
 test = "pytest"
-docs = "mkdocs build --strict"
+docs = "zensical build --strict --clean"
 build = "python -m build && twine check dist/*"
 check = { depends-on = ["format-check", "lint", "typecheck", "test"] }
 

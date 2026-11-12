@@ -1,7 +1,8 @@
 """Evaluation metrics for comparing simulated and observed streamflow.
 
 Every metric takes ``simulated`` and ``observed`` series of equal length and
-returns a single float. Inputs must be one-dimensional, non-empty, and
+returns a single float, so each one satisfies the :class:`MetricFunction`
+protocol. Inputs must be one-dimensional, non-empty, and
 finite. Metrics that would divide by zero for a given input raise
 ``ValueError`` instead of returning ``nan`` or ``inf``.
 
@@ -18,7 +19,7 @@ following Gupta et al. (2009).
 
 import math
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Protocol
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -27,6 +28,34 @@ type KlingGuptaVariant = Literal["2009", "2012"]
 """Version of the Kling-Gupta efficiency: Gupta et al. (2009) or Kling et al. (2012)."""
 
 _KLING_GUPTA_VARIANTS: tuple[str, ...] = ("2009", "2012")
+
+
+class MetricFunction(Protocol):
+    """Call signature shared by every metric in this module.
+
+    A metric compares a simulated series with an observed series and returns
+    a single score. Functions with extra parameters satisfy this protocol as
+    long as those parameters have defaults, such as ``offset`` in
+    :func:`log_nash_sutcliffe_efficiency` or ``variant`` in
+    :func:`kling_gupta_efficiency`.
+    """
+
+    def __call__(self, simulated: ArrayLike, observed: ArrayLike) -> float:
+        """Score ``simulated`` against ``observed``.
+
+        Parameters
+        ----------
+        simulated : array_like
+            Simulated values.
+        observed : array_like
+            Observed values, the same length as ``simulated``.
+
+        Returns
+        -------
+        float
+            The metric value.
+        """
+        ...
 
 
 @dataclass(frozen=True)
@@ -131,7 +160,7 @@ def nash_sutcliffe_efficiency(simulated: ArrayLike, observed: ArrayLike) -> floa
     References
     ----------
     .. [1] Nash, J. E., & Sutcliffe, J. V. (1970). River flow forecasting
-       through conceptual models part I: A discussion of principles.
+       through conceptual models part I — A discussion of principles.
        *Journal of Hydrology, 10*(3), 282-290.
        https://doi.org/10.1016/0022-1694(70)90255-6
     """
@@ -232,7 +261,7 @@ def root_mean_squared_error(simulated: ArrayLike, observed: ArrayLike) -> float:
 
     References
     ----------
-    .. [1] Legates, D. R., & McCabe, G. J., Jr. (1999). Evaluating the use
+    .. [1] Legates, D. R., & McCabe Jr, G. J. (1999). Evaluating the use
        of "goodness-of-fit" measures in hydrologic and hydroclimatic model
        validation. *Water Resources Research, 35*(1), 233-241.
        https://doi.org/10.1029/1998WR900018
@@ -449,7 +478,7 @@ def coefficient_of_variation_ratio(simulated: ArrayLike, observed: ArrayLike) ->
     ----------
     .. [1] Kling, H., Fuchs, M., & Paulin, M. (2012). Runoff conditions in
        the upper Danube basin under an ensemble of climate change scenarios.
-       *Journal of Hydrology, 424-425*, 264-277.
+       *Journal of Hydrology, 424*, 264-277.
        https://doi.org/10.1016/j.jhydrol.2012.01.011
     """
     simulated_array, observed_array = _validate_series(simulated, observed)
@@ -515,7 +544,7 @@ def kling_gupta_decomposition(
        https://doi.org/10.1016/j.jhydrol.2009.08.003
     .. [2] Kling, H., Fuchs, M., & Paulin, M. (2012). Runoff conditions in
        the upper Danube basin under an ensemble of climate change scenarios.
-       *Journal of Hydrology, 424-425*, 264-277.
+       *Journal of Hydrology, 424*, 264-277.
        https://doi.org/10.1016/j.jhydrol.2012.01.011
     """
     if variant not in _KLING_GUPTA_VARIANTS:
@@ -586,7 +615,7 @@ def kling_gupta_efficiency(
        https://doi.org/10.1016/j.jhydrol.2009.08.003
     .. [2] Kling, H., Fuchs, M., & Paulin, M. (2012). Runoff conditions in
        the upper Danube basin under an ensemble of climate change scenarios.
-       *Journal of Hydrology, 424-425*, 264-277.
+       *Journal of Hydrology, 424*, 264-277.
        https://doi.org/10.1016/j.jhydrol.2012.01.011
     """
     return kling_gupta_decomposition(simulated, observed, variant=variant).efficiency
