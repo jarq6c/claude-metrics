@@ -69,8 +69,8 @@ twine = ">=6.0"
 default = { features = ["dev", "docs", "build"], solve-group = "default" }
 
 [tool.pixi.tasks]
-format = "isort . && black ."
-format-check = "isort --check-only --diff . && black --check --diff ."
+format = "isort src tests && black src tests"
+format-check = "isort --check-only --diff src tests && black --check --diff src tests"
 lint = "flake8"
 typecheck = "mypy"
 test = "pytest"
@@ -90,6 +90,7 @@ target-version = ["py313"]
 profile = "black"
 line_length = 99
 src_paths = ["src", "tests"]
+skip_gitignore = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
