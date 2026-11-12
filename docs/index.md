@@ -14,8 +14,9 @@
 pip install hydrodemo
 ```
 
-For development, clone the repository and run:
+For development, install [pixi](https://pixi.sh), clone the repository, and run:
 
 ```bash
-uv sync --all-groups
+pixi install
+pixi run check
 ```

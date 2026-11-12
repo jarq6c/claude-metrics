@@ -24,20 +24,72 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-[dependency-groups]
-dev = [
-    "pytest>=8.3",
-    "pytest-cov>=6.0",
-    "ruff>=0.8",
-    "mypy>=1.13",
-]
-docs = [
-    "mkdocs-material>=9.5",
-    "mkdocstrings[python]>=0.27",
-]
-
 [tool.hatch.build.targets.wheel]
 packages = ["src/hydrodemo"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/hydrodemo", "tests", "docs", "mkdocs.yml", "README.md", "LICENSE"]
+
+# ---------------------------------------------------------------------------
+# Pixi workspace: environments and tasks for development.
+# ---------------------------------------------------------------------------
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+
+[tool.pixi.dependencies]
+python = "3.13.*"
+numpy = ">=2.1"
+scipy = ">=1.14"
+
+[tool.pixi.pypi-dependencies]
+hydrodemo = { path = ".", editable = true }
+
+[tool.pixi.feature.dev.dependencies]
+pytest = ">=8.3"
+pytest-cov = ">=6.0"
+mypy = ">=1.13"
+black = ">=24.10"
+isort = ">=5.13"
+flake8 = ">=7.1"
+flake8-bugbear = ">=24.10"
+flake8-docstrings = ">=1.7"
+pep8-naming = ">=0.14"
+
+[tool.pixi.feature.docs.dependencies]
+mkdocs-material = ">=9.5"
+mkdocstrings-python = ">=1.12"
+
+[tool.pixi.feature.build.dependencies]
+python-build = ">=1.2"
+twine = ">=6.0"
+
+[tool.pixi.environments]
+default = { features = ["dev", "docs", "build"], solve-group = "default" }
+
+[tool.pixi.tasks]
+format = "isort . && black ."
+format-check = "isort --check-only --diff . && black --check --diff ."
+lint = "flake8"
+typecheck = "mypy"
+test = "pytest"
+docs = "mkdocs build --strict"
+build = "python -m build && twine check dist/*"
+check = { depends-on = ["format-check", "lint", "typecheck", "test"] }
+
+# ---------------------------------------------------------------------------
+# Tool settings. flake8 does not read pyproject.toml; see .flake8.
+# ---------------------------------------------------------------------------
+
+[tool.black]
+line-length = 99
+target-version = ["py313"]
+
+[tool.isort]
+profile = "black"
+line_length = 99
+src_paths = ["src", "tests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -47,19 +99,6 @@ addopts = [
     "--cov-report=term-missing",
     "--cov-fail-under=90",
 ]
-
-[tool.ruff]
-line-length = 99
-target-version = "py313"
-
-[tool.ruff.lint]
-select = ["E", "F", "W", "I", "N", "UP", "B", "D", "ANN", "SIM", "RUF"]
-
-[tool.ruff.lint.pydocstyle]
-convention = "numpy"
-
-[tool.ruff.lint.per-file-ignores]
-"tests/**" = ["D", "ANN"]
 
 [tool.mypy]
 python_version = "3.13"

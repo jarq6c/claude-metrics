@@ -10,17 +10,24 @@ calibration, and evaluation metrics. The phased roadmap is in `PLAN.md`.
 
 ## Commands
 
-Use `uv` for everything. Do not use `pip` directly.
+Use `pixi` for environments and tasks. Do not use `pip`, `uv`, or `ruff`
+(the project avoids Astral tools). Tasks are defined in `pyproject.toml`
+under `[tool.pixi.tasks]`.
 
 ```bash
-uv sync --all-groups          # install package and dev/docs dependencies
-uv run pytest                 # tests with coverage (fails under 90%)
-uv run ruff check .           # lint
-uv run ruff format .          # format
-uv run mypy                   # strict type check of src and tests
-uv run mkdocs build --strict  # build docs
-uv build                      # build sdist and wheel
+pixi install            # create the environment from pixi.lock
+pixi run format         # isort + black
+pixi run format-check   # verify formatting without changing files
+pixi run lint           # flake8 with bugbear, docstrings, and naming plugins
+pixi run typecheck      # mypy --strict on src and tests
+pixi run test           # pytest with coverage (fails under 90%)
+pixi run check          # format-check, lint, typecheck, and test together
+pixi run docs           # mkdocs build --strict
+pixi run build          # python -m build, then twine check
 ```
+
+To add a dependency, add it to the right `[tool.pixi...dependencies]` table
+(conda-forge). Runtime dependencies also go in `[project].dependencies`.
 
 ## Code conventions
 
@@ -46,7 +53,7 @@ uv build                      # build sdist and wheel
 
 ## Workflow
 
-- Before committing, run `ruff format`, `ruff check`, `mypy`, and `pytest`. All must pass.
+- Before committing, run `pixi run format` and then `pixi run check`. All must pass.
 - Write or update tests in the same change as the code they cover.
 - Keep commits small and focused on one phase or feature.
 - Update `PLAN.md` checkboxes when a phase is finished.

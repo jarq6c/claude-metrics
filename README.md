@@ -9,6 +9,6 @@ for the roadmap and `CLAUDE.md` for development conventions.
 ## Development
 
 ```bash
-uv sync --all-groups
-uv run pytest
+pixi install
+pixi run check
 ```

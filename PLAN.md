@@ -36,14 +36,14 @@ Code as a development assistant.
 
 | Phase | Work | Claude Code practice | Status |
 |---|---|---|---|
-| 0 | Scaffolding: `pyproject.toml`, `CLAUDE.md`, ruff, mypy, pytest, docs skeleton, CI | Writing project rules in `CLAUDE.md` | [x] |
+| 0 | Scaffolding: `pyproject.toml`, `CLAUDE.md`, pixi, black, isort, flake8, mypy, pytest, docs skeleton, CI | Writing project rules in `CLAUDE.md` | [x] |
 | 1 | `metrics.py` and tests | Test-driven development | [ ] |
 | 2 | `parameters.py`, `forcing.py` | Plan mode: review the design before code | [ ] |
 | 3 | `model.py` | Asking for evidence (passing mass balance test) | [ ] |
 | 4 | `observations.py` | Small, focused commits and PRs per phase | [ ] |
 | 5 | `calibration.py` | `/code-review` and `/simplify` on a larger change | [ ] |
 | 6 | Docs pages, end-to-end example, docs build in CI | Generating docs from docstrings; running examples | [ ] |
-| 7 | `uv build`, `twine check`, optional TestPyPI upload | Confirming before outward-facing actions | [ ] |
+| 7 | `python -m build`, `twine check`, optional TestPyPI upload | Confirming before outward-facing actions | [ ] |
 
 ## Habits to practice
 
