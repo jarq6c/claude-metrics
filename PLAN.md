@@ -37,7 +37,7 @@ Code as a development assistant.
 | Phase | Work | Claude Code practice | Status |
 |---|---|---|---|
 | 0 | Scaffolding: `pyproject.toml`, `CLAUDE.md`, pixi, black, isort, flake8, mypy, pytest, docs skeleton, CI | Writing project rules in `CLAUDE.md` | [x] |
-| 1 | `metrics.py` and tests | Test-driven development | [ ] |
+| 1 | `metrics.py` and tests | Test-driven development | [x] |
 | 2 | `parameters.py`, `forcing.py` | Plan mode: review the design before code | [ ] |
 | 3 | `model.py` | Asking for evidence (passing mass balance test) | [ ] |
 | 4 | `observations.py` | Small, focused commits and PRs per phase | [ ] |
