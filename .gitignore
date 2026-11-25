@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local Claude Code handoff notes (see CLAUDE.md)
+/HANDOFF.md
