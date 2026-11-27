@@ -21,8 +21,8 @@ reviews it on GitHub, and nothing moves forward without approval.
 
 ## How the workflow works
 
-1. **Specify.** Fill in `SPEC.md`. Until its placeholders are replaced, Claude
-   works only from your explicit instructions.
+1. **Specify.** Write the requirements in `SPEC.md`. Claude never invents
+   requirements; work the spec doesn't cover needs your explicit instructions.
 2. **Design.** Claude proposes each change as a GitHub issue or draft pull
    request, then stops for your approval.
 3. **Implement.** Claude makes only the approved change, on a new branch named

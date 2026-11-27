@@ -12,8 +12,8 @@ conventions belong in `STYLE.md`, and requirements belong in `SPEC.md`.
 - The user's current instructions take precedence over all three.
 - When sources conflict or a requirement is ambiguous, stop and ask. Never
   resolve a conflict silently.
-- Never invent requirements. If `SPEC.md` is missing or still holds template
-  placeholders, work only from explicit user instructions and say so.
+- Never invent requirements. If `SPEC.md` is missing or does not cover the
+  task, work only from explicit user instructions and say so.
 
 ## Starting a session
 

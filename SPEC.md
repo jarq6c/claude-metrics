@@ -3,20 +3,13 @@
 **Status:** alpha
 
 <!--
-How to fill in this file
+How to maintain this file
 
 SPEC.md defines what this project builds. STYLE.md defines how code is
 written, and CLAUDE.md defines how Claude Code works. Keep those topics out
 of this file.
 
-This file ships with an example: the requirements for example_package. A new
-project replaces the sections below with its own content.
-
-1. Mark anything not yet written with a placeholder: TODO in capitals,
-   followed by a colon. Claude treats this file as unfilled while any
-   placeholder remains outside this comment, and then works only from the
-   user's explicit instructions.
-2. Change the Status line above as the spec matures:
+1. Change the Status line above as the spec matures:
    - alpha (default): requirements are being drafted and may change freely.
    - beta: all planned requirements are written; they may still change
      after review.
@@ -25,7 +18,7 @@ project replaces the sections below with its own content.
    - release: requirements are agreed; changes go through a reviewed PR.
    The status describes how settled the spec is. Implementation may start
    at any status once its design is approved.
-3. Give each requirement an ID of the form REQ-###-TAG: the next unused
+2. Give each requirement an ID of the form REQ-###-TAG: the next unused
    three-digit number, then a short uppercase tag naming the subject, such
    as REQ-001-NSE. Tags use letters, digits, and hyphens. Once assigned,
    the full ID never changes, and the number is never reused. Always cite
@@ -33,20 +26,20 @@ project replaces the sections below with its own content.
    "(withdrawn)" to its heading and say why, so references in PRs and
    commits stay valid.
    Track progress on requirements in HANDOFF.md, not in this file.
-4. When a requirement adds or changes a public function or class, record its
+3. When a requirement adds or changes a public function or class, record its
    interface: module, signature, inputs with units, return value, and errors.
-5. Write acceptance criteria that a test or a reviewer can check: a specific
+4. Write acceptance criteria that a test or a reviewer can check: a specific
    input, action, or condition and the expected result.
-6. Move each open question into a requirement, constraint, or non-goal once
+5. Move each open question into a requirement, constraint, or non-goal once
    it is answered.
 -->
 
 ## Purpose
 
-`example_package` demonstrates the workflow this template sets up, from a
+`example_package` demonstrates the workflow this repository sets up, from a
 written requirement to tested code. It provides one small function that
 scores simulated streamflow against observed streamflow. Its audience is
-developers adopting the template, who can use it as a reference for how a
+developers learning that workflow, who can use it as a reference for how a
 requirement, its code, and its tests fit together.
 
 ## Scope
