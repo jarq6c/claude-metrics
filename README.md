@@ -51,8 +51,9 @@ hand:
 
 1. Copy `CLAUDE.md`, `STYLE.md`, `SPEC.md`, `.claude/settings.json`, and
    `.gitignore`.
-2. Replace the example requirements in `SPEC.md` with your project's, and
-   leave its `Status` line at `alpha`.
+2. Replace the example requirements in `SPEC.md` with your project's, and set
+   its `Status` line as appropriate to `alpha`, `beta`, `candidate`, or
+   `release`.
 3. Adjust `STYLE.md` if your project uses different conventions.
 4. Start a Claude Code session in the repository and describe the first change.
 
