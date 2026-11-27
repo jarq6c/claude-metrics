@@ -17,9 +17,13 @@ of this file.
    - template: not filled in yet
    - draft: filled in, still under discussion
    - approved: agreed; changes go through a reviewed PR
-3. Give each requirement the next unused ID (REQ-001, REQ-002, ...). Never
-   reuse or renumber an ID. To drop a requirement, add "(withdrawn)" to
-   its heading and say why, so references in PRs and commits stay valid.
+3. Give each requirement an ID of the form REQ-###-TAG: the next unused
+   three-digit number, then a short uppercase tag naming the subject, such
+   as REQ-001-NSE. Tags use letters, digits, and hyphens. Once assigned,
+   the full ID never changes, and the number is never reused. Always cite
+   the full ID, not just the number. To drop a requirement, add
+   "(withdrawn)" to its heading and say why, so references in PRs and
+   commits stay valid.
    Track progress on requirements in HANDOFF.md, not in this file.
 4. Write acceptance criteria that a test or a reviewer can check: a specific
    input, action, or condition and the expected result.
@@ -28,7 +32,7 @@ of this file.
 
 Example requirement:
 
-### REQ-001: Compute the Nash-Sutcliffe efficiency
+### REQ-001-NSE: Compute the Nash-Sutcliffe efficiency
 
 - **Description:** Provide a function that scores simulated streamflow
   against observed streamflow using the Nash-Sutcliffe efficiency.
@@ -57,7 +61,7 @@ who will use it.
 
 Each requirement has an ID, a short title, a description, and acceptance criteria.
 
-### REQ-001: TODO: Short title
+### REQ-001-TAG: TODO: Replace TAG with a short tag, and this text with a short title
 
 - **Description:** TODO: What the project must do, in one or two sentences.
 - **Acceptance criteria:**

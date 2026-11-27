@@ -5,8 +5,8 @@ conventions belong in `STYLE.md`, and requirements belong in `SPEC.md`.
 
 ## Sources of authority
 
-- `SPEC.md` defines what to build: scope, requirements (`REQ-###`), and
-  acceptance criteria.
+- `SPEC.md` defines what to build: scope, requirements (IDs such as
+  `REQ-001-NSE`), and acceptance criteria.
 - `STYLE.md` defines how code, tests, configuration, and documentation are written.
 - This file defines how work is planned, reviewed, verified, and handed off.
 - The user's current instructions take precedence over all three.
@@ -51,7 +51,7 @@ current PR is merged, unless the user says otherwise.
 Every PR description includes:
 
 - **Summary:** what changed and why.
-- **Requirements:** the `REQ-###` IDs covered, or "none" with a reason.
+- **Requirements:** the full requirement IDs covered, or "none" with a reason.
 - **Decisions needing review:** every choice not dictated by `SPEC.md` or `STYLE.md`.
 - **Verification:** each check, its command, and its status.
 
