@@ -15,7 +15,8 @@ workflow; `SPEC.md` covers requirements.
 - Spell out names in full: `rainfall_depth`, not `rd`, `p`, or `depth_mm`.
 - This includes loop variables and indices: `timestep_index`, not `i`.
 - Common abbreviations that are clearer than the long form are allowed when
-  they are standard in the field, such as `id` or `url`.
+  they are standard in the field, such as `id`, `url`, or `rng` (the NumPy
+  convention for a random number generator).
 - Modules and functions use `snake_case`, classes use `PascalCase`, and
   constants use `UPPER_SNAKE_CASE`.
 
@@ -80,9 +81,23 @@ def nash_sutcliffe_efficiency(simulated: ArrayLike, observed: ArrayLike) -> floa
 
 ## Randomness
 
-- Any function that uses randomness takes `random_seed: int | None` and creates
-  its generator with `numpy.random.default_rng(random_seed)`.
+- Any function that uses randomness takes an optional generator,
+  `rng: numpy.random.Generator | None = None`, and draws every random value from it.
+- When `rng` is `None`, create one with `numpy.random.default_rng()`.
+- Callers control reproducibility by creating the generator themselves, for
+  example `numpy.random.default_rng(42)`, and passing it in. Passing one
+  generator through a sequence of calls keeps their random streams independent.
 - Never use global random state such as `numpy.random.seed` or the `random` module.
+
+```python
+def generate_rainfall(
+    number_of_timesteps: int, rng: np.random.Generator | None = None
+) -> NDArray[np.float64]:
+    """..."""
+    if rng is None:
+        rng = np.random.default_rng()
+    return rng.exponential(scale=2.0, size=number_of_timesteps)
+```
 
 ## Design
 
@@ -157,7 +172,8 @@ they cannot touch the pixi environment in `.pixi/`.
 - Test error paths: every `ValueError` a public function can raise has a test,
   using `pytest.raises(..., match=...)`.
 - Keep coverage at 90% or higher. pytest-cov enforces this floor.
-- Use fixed seeds in tests of random behavior.
+- In tests of random behavior, pass a generator created from a fixed seed,
+  such as `numpy.random.default_rng(12345)`.
 
 ## Documentation
 
