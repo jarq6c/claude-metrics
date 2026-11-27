@@ -29,12 +29,22 @@ The user reviews all work on GitHub. Each gate ends with a stop.
 1. **Design.** Propose the change as a GitHub issue or draft PR: affected files,
    public interfaces, planned tests, requirement IDs, and open decisions. Write
    no implementation code. Stop and wait for approval.
-2. **Implement.** After approval, make only the approved change, on its own branch.
+2. **Implement.** After approval, make only the approved change, on a new branch
+   (see Branches).
 3. **Review.** Open one small PR, about 100 to 300 reviewable lines, not counting
    lock files. Stop and wait for review.
 
 Keep only one PR open at a time. Do not start the next piece of work until the
 current PR is merged, unless the user says otherwise.
+
+## Branches
+
+- Start each PR on a new branch created from the latest `main`. Never commit
+  directly to `main`.
+- Name the branch `claude/` followed by a short, lowercase, hyphenated
+  description of the change, for example `claude/add-style-guide`.
+- After the PR merges, update local `main` and delete the local branch. Never
+  reuse a merged branch.
 
 ## Pull requests
 
