@@ -25,6 +25,12 @@ classifiers = [
     "Typing :: Typed",
 ]
 
+[project.urls]
+Homepage = "https://github.com/jarq6c/claude-metrics"
+Documentation = "https://jarq6c.github.io/claude-metrics"
+Repository = "https://github.com/jarq6c/claude-metrics"
+"Bug Tracker" = "https://github.com/jarq6c/claude-metrics/issues"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/example_package"]
 
