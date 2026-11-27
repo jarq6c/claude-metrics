@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log)",
+      "Bash(git log *)",
+      "Bash(git show)",
+      "Bash(git show *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(pixi run *)"
+    ],
+    "ask": [
+      "Bash(git push)",
+      "Bash(git push *)",
+      "Bash(pixi add *)"
+    ],
+    "deny": [
+      "Bash(git push *--force*)",
+      "Bash(git push -f *)",
+      "Bash(git push * -f)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf *)",
+      "Bash(pip *)",
+      "Bash(pip3 *)",
+      "Bash(python -m pip *)",
+      "Bash(python3 -m pip *)",
+      "Bash(uv *)",
+      "Bash(uvx *)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f \"$CLAUDE_PROJECT_DIR/HANDOFF.md\" ]; then cat \"$CLAUDE_PROJECT_DIR/HANDOFF.md\"; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
