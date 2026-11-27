@@ -1,0 +1,93 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "example_package"
+version = "0.1.0"
+description = "Example package for the Claude Code Python project template."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.13"
+dependencies = ["numpy>=2.1"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/example_package"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/example_package", "tests", "README.md", "LICENSE"]
+
+# ---------------------------------------------------------------------------
+# Pixi workspace: development environments and tasks.
+# ---------------------------------------------------------------------------
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.dependencies]
+python = "3.13.*"
+numpy = ">=2.1"
+
+[tool.pixi.pypi-dependencies]
+example_package = { path = ".", editable = true }
+
+[tool.pixi.feature.dev.dependencies]
+black = "*"
+isort = "*"
+flake8 = "*"
+flake8-bugbear = "*"
+flake8-docstrings = "*"
+pep8-naming = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+
+[tool.pixi.feature.build.dependencies]
+python-build = "*"
+twine = "*"
+
+[tool.pixi.environments]
+default = { features = ["dev", "build"], solve-group = "default" }
+
+[tool.pixi.tasks]
+format = "isort src tests && black src tests"
+format-check = "isort --check-only --diff src tests && black --check --diff src tests"
+lint = "flake8 src tests"
+typecheck = "mypy"
+test = "pytest"
+check = { depends-on = ["format-check", "lint", "typecheck", "test"] }
+build = "python -m build && twine check dist/*"
+
+# ---------------------------------------------------------------------------
+# Tool settings. flake8 does not read pyproject.toml; see .flake8.
+# ---------------------------------------------------------------------------
+
+[tool.black]
+line-length = 99
+target-version = ["py313"]
+
+[tool.isort]
+profile = "black"
+line_length = 99
+src_paths = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "--strict-markers",
+    "--cov=example_package",
+    "--cov-report=term-missing",
+    "--cov-fail-under=90",
+]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+files = ["src", "tests"]
