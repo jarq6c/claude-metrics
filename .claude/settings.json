@@ -12,7 +12,9 @@
       "Bash(git show *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(pixi run *)"
+      "Bash(pixi run *)",
+      "Bash(rm *)",
+      "Bash(rmdir *)"
     ],
     "ask": [
       "Bash(git push)",
@@ -24,7 +26,14 @@
       "Bash(git push -f *)",
       "Bash(git push * -f)",
       "Bash(git reset --hard*)",
-      "Bash(rm -rf *)",
+      "Bash(rm -r*)",
+      "Bash(rm -R*)",
+      "Bash(rm -fr*)",
+      "Bash(rm -fR*)",
+      "Bash(rm * -r*)",
+      "Bash(rm * -R*)",
+      "Bash(rm * -fr*)",
+      "Bash(rm *--recursive*)",
       "Bash(pip *)",
       "Bash(pip3 *)",
       "Bash(python -m pip *)",
