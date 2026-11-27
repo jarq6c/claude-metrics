@@ -174,6 +174,18 @@ they cannot touch the pixi environment in `.pixi/`.
 - Keep coverage at 90% or higher. pytest-cov enforces this floor.
 - In tests of random behavior, pass a generator created from a fixed seed,
   such as `numpy.random.default_rng(12345)`.
+- Tests that write files use pytest's `tmp_path` fixture. It gives each test
+  its own directory under the system temporary folder, outside the
+  repository, and pytest removes all but the most recent runs' directories
+  automatically. Never write test output into the repository.
+
+## Temporary files
+
+- Put prototypes, scratch scripts, and intermediate output outside the
+  repository: in the Claude Code session scratchpad when one is available,
+  otherwise in a temporary directory.
+- Delete temporary files once they are no longer needed. Promote a prototype
+  into `src/` or `tests/` only through a reviewed PR.
 
 ## Documentation
 
