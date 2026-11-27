@@ -1,8 +1,13 @@
 # STYLE.md
 
-How code, tests, configuration, and documentation are written in this project.
-Read this file in full before changing any of them. `CLAUDE.md` covers the
-workflow; `SPEC.md` covers requirements.
+Style, standards, and coding conventions for this project's Python code,
+tests, configuration, and documentation. Despite the name, this file covers
+more than formatting: it also sets the tooling, project layout, testing
+framework, and handling of temporary files.
+
+Read this file in full before changing code, tests, or configuration.
+`CLAUDE.md` covers the general development workflow and Git branching, and
+`SPEC.md` covers requirements.
 
 ## Python version and syntax
 
@@ -174,6 +179,18 @@ they cannot touch the pixi environment in `.pixi/`.
 - Keep coverage at 90% or higher. pytest-cov enforces this floor.
 - In tests of random behavior, pass a generator created from a fixed seed,
   such as `numpy.random.default_rng(12345)`.
+- Tests that write files use pytest's `tmp_path` fixture. It gives each test
+  its own directory under the system temporary folder, outside the
+  repository, and pytest removes all but the most recent runs' directories
+  automatically. Never write test output into the repository.
+
+## Temporary files
+
+- Put prototypes, scratch scripts, and intermediate output outside the
+  repository: in the Claude Code session scratchpad when one is available,
+  otherwise in a temporary directory.
+- Delete temporary files once they are no longer needed. Promote a prototype
+  into `src/` or `tests/` only through a reviewed PR.
 
 ## Documentation
 
