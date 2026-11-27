@@ -15,7 +15,7 @@ reviews it on GitHub, and nothing moves forward without approval.
 |---|---|
 | `CLAUDE.md` | How Claude works: the general development workflow, review gates, Git branching, pull request contents, and what needs approval. Claude Code loads it in every session. |
 | `STYLE.md` | Style, standards, and coding conventions for Python code, tests, tooling, and documentation. |
-| `SPEC.md` | A template for the project's requirements, with IDs such as `REQ-001-NSE` and checkable acceptance criteria. |
+| `SPEC.md` | The project's requirements, with IDs such as `REQ-001-NSE`, public interfaces, and checkable acceptance criteria. It ships with the example package's requirements, which a new project replaces. |
 | `.claude/settings.json` | Claude Code permission rules, and a hook that loads `HANDOFF.md` at the start of each session. |
 | `.gitignore` | Standard Python ignores, plus the local `HANDOFF.md`. |
 
@@ -51,7 +51,8 @@ hand:
 
 1. Copy `CLAUDE.md`, `STYLE.md`, `SPEC.md`, `.claude/settings.json`, and
    `.gitignore`.
-2. Fill in `SPEC.md` for your project and set its `Status` line to `draft`.
+2. Replace the example requirements in `SPEC.md` with your project's, and
+   leave its `Status` line at `alpha`.
 3. Adjust `STYLE.md` if your project uses different conventions.
 4. Start a Claude Code session in the repository and describe the first change.
 
