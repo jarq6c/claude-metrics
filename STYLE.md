@@ -1,8 +1,13 @@
 # STYLE.md
 
-How code, tests, configuration, and documentation are written in this project.
-Read this file in full before changing any of them. `CLAUDE.md` covers the
-workflow; `SPEC.md` covers requirements.
+Style, standards, and coding conventions for this project's Python code,
+tests, configuration, and documentation. Despite the name, this file covers
+more than formatting: it also sets the tooling, project layout, testing
+framework, and handling of temporary files.
+
+Read this file in full before changing code, tests, or configuration.
+`CLAUDE.md` covers the general development workflow and Git branching, and
+`SPEC.md` covers requirements.
 
 ## Python version and syntax
 
